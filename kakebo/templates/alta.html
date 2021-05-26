@@ -1,21 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakebo | Nuevo</title>
-</head>
-<body>
-    <header>
-        kakebo Web - BZ VII
-    </header>
-    <section>
-        <h1>Nuevo movimiento </h1>
-    </section>
-    <footer>
-        &copy; Todos los derechos reservados 2021
-    </footer>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block titulo %}Nuevo{% endblock %}
+
+{% block contenido %}
+
+<h1>Nuevo movimiento  </h1>
+<form action="nuevo" method="post">
+    <fieldset class="container">
+        <div>
+            {{ form.fecha.label(class="mylabel") }}
+            {{ form.fecha() }}
+        </div>
+        <div >
+            {{ form.concepto.label(class="mylabel") }}
+            {{ form.concepto() }}
+        </div>
+        <div >
+            {{ form.categoria.label(class="mylabel") }}
+            {{ form.categoria() }}
+        </div>
+        <div >
+            {{ form.cantidad.label(class="mylabel") }}
+            {{ form.cantidad() }}
+        </div>
+        <div >
+            {{ form.esGasto.label(class="mylabel") }}
+            {{ form.esGasto() }}
+        </div>
+    </fieldset>
+    {{ form.submit()}}
+</form>
+
+{% endblock %}
