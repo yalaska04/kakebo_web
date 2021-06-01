@@ -9,7 +9,7 @@ def fecha_por_debajo_de_hoy(formulario, campo):
     if campo.data > hoy:
         raise ValidationError('La fecha {} no puede ser mayor que {}'.format(campo.data, hoy))
 
-class MovimientosForm(FlaskForm):
+class MovimientosForm(FlaskForm): # Clase Movimientos hereda de las clase FlaskForm, que tiene métodos HiddenField(), DateField(), etc.  
     id = HiddenField()
     fecha = DateField("Fecha", validators = [DataRequired(message="Debe informar una fecha válida"), fecha_por_debajo_de_hoy])
     concepto = StringField("Concepto", validators = [DataRequired(), Length(min=10)])
@@ -18,3 +18,9 @@ class MovimientosForm(FlaskForm):
     cantidad = FloatField("Cantidad", validators = [DataRequired()])
     esGasto = BooleanField("Es gasto")
     submit = SubmitField('Aceptar')
+
+class FiltradoMovimientosForm(FlaskForm): 
+    fechaDesde = DateField('Desde', validators=[fecha_por_debajo_de_hoy])
+    fechaHasta = DateField('Hasta', validators=[fecha_por_debajo_de_hoy])
+    texto = StringField('Concepto')
+    submit = SubmitField('Filtrar')

@@ -3,8 +3,8 @@
 {% block titulo %}Nuevo{% endblock %}
 
 {% block contenido %}
-<h1>Nuevo movimiento</h1>
-<form action="modificar/{{ form.id.data }}" method="post">
+<h1>Modificar movimiento</h1>
+<form action="/modificar/{{ form.id.data }}" method="post">
     <fieldset class="container">
         {{ form.hidden_tag() }}
 
