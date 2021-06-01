@@ -5,7 +5,10 @@ from wtforms.validators import DataRequired, Length, ValidationError
 from datetime import date
 
 def fecha_por_debajo_de_hoy(formulario, campo):
+    if campo.data == None: 
+        return 
     hoy = date.today()
+
     if campo.data > hoy:
         raise ValidationError('La fecha {} no puede ser mayor que {}'.format(campo.data, hoy))
 
@@ -20,7 +23,8 @@ class MovimientosForm(FlaskForm): # Clase Movimientos hereda de las clase FlaskF
     submit = SubmitField('Aceptar')
 
 class FiltradoMovimientosForm(FlaskForm): 
-    fechaDesde = DateField('Desde', validators=[fecha_por_debajo_de_hoy])
-    fechaHasta = DateField('Hasta', validators=[fecha_por_debajo_de_hoy])
+    fechaDesde = DateField('Desde', validators=[fecha_por_debajo_de_hoy], default = date(1, 1, 1))
+    fechaHasta = DateField('Hasta', validators=[fecha_por_debajo_de_hoy], default = date.today())
     texto = StringField('Concepto')
     submit = SubmitField('Filtrar')
+
